@@ -1,0 +1,13 @@
+com\example\mymarketplace\controllers\WashingMachineController.class
+com\example\mymarketplace\models\WashingMachine.class
+com\example\mymarketplace\models\Telephone.class
+com\example\mymarketplace\controllers\BookController.class
+com\example\mymarketplace\repositories\BookRepository.class
+com\example\mymarketplace\controllers\ClientController.class
+com\example\mymarketplace\repositories\WashingMachineRepository.class
+com\example\mymarketplace\controllers\TelephoneController.class
+com\example\mymarketplace\repositories\TelephoneRepository.class
+com\example\mymarketplace\models\Client.class
+com\example\mymarketplace\models\Book.class
+com\example\mymarketplace\repositories\ClientRepository.class
+com\example\mymarketplace\MyMarketPlaceApplication.class
