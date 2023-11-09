@@ -25,6 +25,19 @@ public class WashingMachine {
     @Column(name = "name")
     private String name;
 
+    public WashingMachine(String manufacturer, Integer tankVolume, String seller, String type, Integer cost, String name) {
+        this.manufacturer = manufacturer;
+        this.tankVolume = tankVolume;
+        this.seller = seller;
+        this.type = type;
+        this.cost = cost;
+        this.name = name;
+    }
+
+    public WashingMachine() {
+
+    }
+
     public Long getId() {
         return id;
     }

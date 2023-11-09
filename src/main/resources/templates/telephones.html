@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Telephones</title>
+</head>
+<body>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Manufacturer</th>
+        <th>Battery Capacity</th>
+        <th>Seller Number</th>
+        <th>Type</th>
+        <th>Cost</th>
+        <th>Name</th>
+        <th>Action</th>
+    </tr>
+    <tr th:each="telephone : ${telephones}">
+        <td th:text="${telephone.id}"></td>
+        <td th:text="${telephone.manufacturer}"></td>
+        <td th:text="${telephone.batteryCapacity}"></td>
+        <td th:text="${telephone.seller}"></td>
+        <td th:text="${telephone.type}"></td>
+        <td th:text="${telephone.cost}"></td>
+        <td th:text="${telephone.name}"></td>
+        <td>
+            <a th:href="@{/telephones/delete/{id}(id=${telephone.id})}" class="btn btn-success">Delete</a>
+        </td>
+</table>
+
+<h1>Add new telephone</h1>
+<form action="/telephones/add" method="post">
+<!--    //Telephone – модель, описывающая сущность телефона.-->
+<!--    //        Обязательные поля: производитель, объем аккумулятора,-->
+<!--    //        номер продавца, тип продукта (подразумевается электроника,-->
+<!--    //        книги, сантехника и т.п.), стоимость, название.-->
+    <label for="manufacturer">Manufacturer: </label>
+    <input type="text" id="manufacturer" name="manufacturer" required><br>
+
+    <label for="batteryCapacity">Battery Capacity: </label>
+    <input type="text" id="batteryCapacity" name="batteryCapacity" required><br>
+
+    <label for="seller">Seller: </label>
+    <input type="text" id="seller" name="seller" required><br>
+
+    <label for="type">Type: </label>
+    <input type="text" id="type" name="type" required><br>
+
+    <label for="cost">Cost: </label>
+    <input type="text" id="cost" name="cost" required><br>
+
+    <label for="name">Name: </label>
+    <input type="text" id="name" name="name" required><br>
+
+    <button type="submit">Add</button>
+</form>
+</body>
+</html>

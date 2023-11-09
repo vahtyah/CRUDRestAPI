@@ -18,32 +18,21 @@ public class BookController {
     @GetMapping
     public String getAllBooks(Model model) {
         List<Book> books = bookRepository.findAll();
+        books.sort((o1, o2) -> (int) (o1.getId() - o2.getId()));
         model.addAttribute("books", books);
-        return "products";
-    }
-
-    @GetMapping("/addForm")
-    public String addForm(Model model) {
-        return "addBook";
+        return "books";
     }
 
     @PostMapping("/add")
     public String addBook(@RequestParam String name, @RequestParam String author, @RequestParam String type, @RequestParam String seller, @RequestParam Integer cost, Model model) {
         Book book = new Book(name, author, type, seller, cost);
         bookRepository.save(book);
-        List<Book> books = bookRepository.findAll();
-        model.addAttribute("books", books);
-        return "products";
+        return getAllBooks(model);
     }
 
     @GetMapping("/{id}")
     public Book getBookById(@PathVariable Long id) {
         return bookRepository.findById(id).get();
-    }
-
-    @PostMapping
-    public Book createBook(@RequestBody Book book) {
-        return bookRepository.save(book);
     }
 
     @PutMapping("/{id}")
@@ -57,11 +46,11 @@ public class BookController {
         return bookRepository.save(bookFromDb);
     }
 
-    @DeleteMapping("/{id}")
-    public String deleteBook(@PathVariable Long id) {
+    @GetMapping("/delete/{id}")
+    public String deleteBook(@PathVariable Long id, Model model) {
         try {
             bookRepository.deleteById(id);
-            return "Book deleted";
+            return getAllBooks(model);
         } catch (Exception e) {
             return "Book not found";
         }

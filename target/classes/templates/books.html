@@ -1,9 +1,30 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Add new book</title>
+    <title>Books</title>
 </head>
 <body>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Author</th>
+        <th>Type</th>
+        <th>Cost</th>
+        <th>Action</th>
+    </tr>
+    <tr th:each="book : ${books}">
+        <td th:text="${book.id}"></td>
+        <td th:text="${book.name}"></td>
+        <td th:text="${book.author}"></td>
+        <td th:text="${book.type}"></td>
+        <td th:text="${book.cost}"></td>
+        <td>
+            <a th:href="@{/books/delete/{id}(id=${book.id})}" class="btn btn-success">Delete</a>
+        </td>
+    </tr>
+</table>
+
 <h1>Add new book</h1>
 <form action="/books/add" method="post">
 <!--    //Book – модель, которая описывает сущность книги, с полями:-->

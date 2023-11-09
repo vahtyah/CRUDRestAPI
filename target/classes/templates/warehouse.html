@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Warehouse</title>
+</head>
+<body>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Amount</th>
+        <th>Type</th>
+    </tr>
+    <tr th:each="warehouse : ${warehouses}">
+        <td th:text="${warehouse.id}"></td>
+        <td th:text="${warehouse.name}"></td>
+
+        <td>
+            <form action="/warehouses/updateAmount" method="post">
+                <input type="hidden" name="id" th:value="${warehouse.id}">
+                <button type="submit" name="action" value="decrease">-</button>
+                <span th:text="${warehouse.amount}"></span>
+                <button type="submit" name="action" value="increase">+</button>
+            </form>
+        </td>
+
+
+        <td th:text="${warehouse.type}"></td>
+        <td>
+            <a th:href="@{/warehouses/delete/{id}(id=${warehouse.id})}" class="btn btn-success">Delete</a>
+        </td>
+    </tr>
+</table>
+
+<a th:href="@{/warehouses/reload}" class="btn btn-success">Reload</a>
+</body>
+</html>

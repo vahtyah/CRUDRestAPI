@@ -2,61 +2,35 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Book List</title>
+    <title>Cart</title>
 </head>
 <body>
-<h1>Book List</h1>
+<h1>Cart</h1>
 <table>
     <tr>
         <th>ID</th>
         <th>Name</th>
         <th>Amount</th>
         <th>Cost</th>
+        <th>Action</th>
     <tr th:each="cart : ${carts}">
         <td th:text="${cart.id}"></td>
         <td th:text="${cart.name}"></td>
         <td>
-            <button onclick="decreaseAmount(this)">-</button>
-            <span th:text="${cart.amount}"></span>
-            <button onclick="increaseAmount(this)">+</button>
+            <form action="/carts/updateAmount" method="post">
+                <input type="hidden" name="id" th:value="${cart.id}">
+                <button type="submit" name="action" value="decrease">-</button>
+                <span th:text="${cart.amount}"></span>
+                <button type="submit" name="action" value="increase">+</button>
+            </form>
         </td>
     <td th:text="${cart.sumCost}" data-cost="${cart.cost}"></td>
+    <td>
+        <a th:href="@{/carts/deleteFromCart/{id}(id=${cart.id})}" class="btn btn-danger">Delete</a>
+    </td>
+
     </tr>
-
 </table>
-
-
-
-<script>
-    function decreaseAmount(button) {
-        var amountElement = button.nextSibling.nextSibling; // Chọn phần tử span chứa giá trị "Amount"
-        var currentAmount = parseInt(amountElement.textContent);
-        if (currentAmount > 1) {
-            currentAmount--;
-            amountElement.textContent = currentAmount;
-            updateSumCost(button.parentNode.parentNode, currentAmount + 1); // Cập nhật sumCost
-        }
-    }
-
-    function increaseAmount(button) {
-        var amountElement = button.previousSibling.previousSibling; // Chọn phần tử span chứa giá trị "Amount"
-        var currentAmount = parseInt(amountElement.textContent);
-        currentAmount++;
-        amountElement.textContent = currentAmount;
-        updateSumCost(button.parentNode.parentNode, currentAmount - 1); // Cập nhật sumCost
-    }
-
-    function updateSumCost(row, currentAmount) {
-        var amountElement = row.querySelector("span"); // Lấy giá trị "Amount" mới
-        var sumCostElement = row.querySelector("td:last-child"); // Lấy phần tử thể hiện "sumCost"
-
-        var cost = parseFloat(sumCostElement.textContent);
-        var amount = parseInt(amountElement.textContent);
-        var sumCost = cost/currentAmount * amount;
-        sumCostElement.textContent = sumCost;
-    }
-</script>
-
-
+<a th:href="@{/carts/deleteAll}" class="btn btn-primary">Order</a>
 </body>
 </html>

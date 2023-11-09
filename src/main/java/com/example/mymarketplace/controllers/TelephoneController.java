@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/api/telephones")
+@RequestMapping("/telephones")
 public class TelephoneController {
     @Autowired
     private TelephoneRepository telephoneRepository;
@@ -18,18 +18,16 @@ public class TelephoneController {
     @GetMapping
     public String getAllTelephones(Model model) {
         List<Telephone> telephones = telephoneRepository.findAll();
+        telephones.sort((o1, o2) -> (int) (o1.getId() - o2.getId()));
         model.addAttribute("telephones", telephones);
-        return "products";
+        return "telephones";
     }
 
-    @GetMapping("/{id}")
-    public Telephone getTelephoneById(@PathVariable Long id) {
-        return telephoneRepository.findById(id).get();
-    }
-
-    @PostMapping
-    public Telephone createTelephone(@RequestBody Telephone telephone) {
-        return telephoneRepository.save(telephone);
+    @PostMapping("/add")
+    public String addTelephone(@RequestParam String manufacturer, @RequestParam Integer batteryCapacity, @RequestParam String seller, @RequestParam String type, @RequestParam Integer cost, @RequestParam String name, Model model) {
+        Telephone telephone = new Telephone(manufacturer, batteryCapacity, seller, type, cost, name);
+        telephoneRepository.save(telephone);
+        return getAllTelephones(model);
     }
 
     @PutMapping("/{id}")
@@ -42,11 +40,11 @@ public class TelephoneController {
         return telephoneRepository.save(telephoneFromDb);
     }
 
-    @DeleteMapping("/{id}")
-    public String deleteTelephone(@PathVariable Long id) {
+    @GetMapping("/delete/{id}")
+    public String deleteTelephone(@PathVariable Long id, Model model) {
         try {
             telephoneRepository.deleteById(id);
-            return "Telephone deleted";
+            return getAllTelephones(model);
         } catch (Exception e) {
             return "Telephone not found";
         }

@@ -25,6 +25,19 @@ public class Telephone {
     @Column(name = "name")
     private String name;
 
+    public Telephone(String manufacturer, Integer batteryCapacity, String seller, String type, Integer cost, String name) {
+        this.manufacturer = manufacturer;
+        this.batteryCapacity = batteryCapacity;
+        this.seller = seller;
+        this.type = type;
+        this.cost = cost;
+        this.name = name;
+    }
+
+    public Telephone() {
+
+    }
+
     public Long getId() {
         return id;
     }
