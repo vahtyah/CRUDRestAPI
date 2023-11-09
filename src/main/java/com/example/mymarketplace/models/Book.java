@@ -22,6 +22,18 @@ public class Book {
     @Column(name = "name")
     private String name;
 
+    public Book(String name, String author, String type, String seller, Integer cost) {
+        this.name = name;
+        this.author = author;
+        this.type = type;
+        this.seller = seller;
+        this.cost = cost;
+    }
+
+    public Book() {
+
+    }
+
     public Long getId() {
         return id;
     }

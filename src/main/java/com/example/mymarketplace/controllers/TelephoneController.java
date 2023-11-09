@@ -3,19 +3,23 @@ package com.example.mymarketplace.controllers;
 import com.example.mymarketplace.models.Telephone;
 import com.example.mymarketplace.repositories.TelephoneRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+@Controller
 @RequestMapping("/api/telephones")
 public class TelephoneController {
     @Autowired
     private TelephoneRepository telephoneRepository;
 
     @GetMapping
-    public List<Telephone> getAllTelephones() {
-        return telephoneRepository.findAll();
+    public String getAllTelephones(Model model) {
+        List<Telephone> telephones = telephoneRepository.findAll();
+        model.addAttribute("telephones", telephones);
+        return "products";
     }
 
     @GetMapping("/{id}")

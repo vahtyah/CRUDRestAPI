@@ -3,19 +3,37 @@ package com.example.mymarketplace.controllers;
 import com.example.mymarketplace.models.Book;
 import com.example.mymarketplace.repositories.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
-@RequestMapping("/api/books")
+@Controller
+@RequestMapping("/books")
 public class BookController {
     @Autowired
     private BookRepository bookRepository;
 
     @GetMapping
-    public List<Book> getAllBooks() {
-        return bookRepository.findAll();
+    public String getAllBooks(Model model) {
+        List<Book> books = bookRepository.findAll();
+        model.addAttribute("books", books);
+        return "products";
+    }
+
+    @GetMapping("/addForm")
+    public String addForm(Model model) {
+        return "addBook";
+    }
+
+    @PostMapping("/add")
+    public String addBook(@RequestParam String name, @RequestParam String author, @RequestParam String type, @RequestParam String seller, @RequestParam Integer cost, Model model) {
+        Book book = new Book(name, author, type, seller, cost);
+        bookRepository.save(book);
+        List<Book> books = bookRepository.findAll();
+        model.addAttribute("books", books);
+        return "products";
     }
 
     @GetMapping("/{id}")

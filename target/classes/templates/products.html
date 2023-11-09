@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Products</title>
+</head>
+<body>
+<h1>Cart</h1>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Author</th>
+        <th>Type</th>
+        <th>Cost</th>
+        <th>Action</th>
+    </tr>
+    <tr th:each="book : ${books}">
+        <td th:text="${book.id}"></td>
+        <td th:text="${book.name}"></td>
+        <td th:text="${book.author}"></td>
+        <td th:text="${book.type}"></td>
+        <td th:text="${book.cost}"></td>
+        <td>
+            <a th:href="@{/carts/addToCart/{id}(id=${book.id}, type='book')}" class="btn btn-success">Add to cart</a>
+        </td>
+    </tr>
+</table>
+
+<a th:href="@{/books/addForm}" class="btn btn-primary">Thêm sách mới</a>
+
+
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Manufacturer</th>
+        <th>Battery Capacity</th>
+        <th>Seller Number</th>
+        <th>Type</th>
+        <th>Cost</th>
+        <th>Name</th>
+    </tr>
+    <tr th:each="telephone : ${telephones}">
+        <td th:text="${telephone.id}"></td>
+        <td th:text="${telephone.manufacturer}"></td>
+        <td th:text="${telephone.batteryCapacity}"></td>
+        <td th:text="${telephone.seller}"></td>
+        <td th:text="${telephone.type}"></td>
+        <td th:text="${telephone.cost}"></td>
+        <td th:text="${telephone.name}"></td>
+</table>
+
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Manufacturer</th>
+        <th>Volume</th>
+        <th>Seller Number</th>
+        <th>Type</th>
+        <th>Cost</th>
+        <th>Name</th>
+    </tr>
+    <tr th:each="washingMachine : ${washingMachines}">
+        <td th:text="${washingMachine.id}"></td>
+        <td th:text="${washingMachine.manufacturer}"></td>
+        <td th:text="${washingMachine.tankVolume}"></td>
+        <td th:text="${washingMachine.seller}"></td>
+        <td th:text="${washingMachine.type}"></td>
+        <td th:text="${washingMachine.cost}"></td>
+        <td th:text="${washingMachine.name}"></td>
+</table>
+
+
+
+</body>
+</html>
