@@ -19,6 +19,7 @@ public class WashingMachineController {
     public String getAllWashingMachines(Model model) {
         List<WashingMachine> washingMachines = washingMachineRepository.findAll();
         washingMachines.sort((o1, o2) -> (int) (o1.getId() - o2.getId()));
+        System.out.println("WashingMachines: " + washingMachines);
         model.addAttribute("washingMachines", washingMachines);
         return "washingMachines";
     }

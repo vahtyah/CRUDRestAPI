@@ -1,8 +1,95 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <title>Books</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 20px;
+        }
+
+        table {
+            width: 80%;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        td {
+            background-color: #fff;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .btn-danger {
+            background-color: #d9534f;
+            color: #fff;
+        }
+
+        form {
+            max-width: 60%;
+            padding: 20px;
+            border: 1px solid #ddd;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .btn-success {
+            background-color: #4CAF50;
+            color: #fff;
+            text-decoration: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        .btn {
+            text-decoration: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            display: inline-block;
+            margin-top: 5px;
+        }
+    </style>
 </head>
+
 <body>
 <table>
     <tr>
@@ -20,16 +107,13 @@
         <td th:text="${book.type}"></td>
         <td th:text="${book.cost}"></td>
         <td>
-            <a th:href="@{/books/delete/{id}(id=${book.id})}" class="btn btn-success">Delete</a>
+            <a th:href="@{/books/delete/{id}(id=${book.id})}" class="btn btn-danger">Delete</a>
         </td>
     </tr>
 </table>
 
 <h1>Add new book</h1>
 <form action="/books/add" method="post">
-<!--    //Book – модель, которая описывает сущность книги, с полями:-->
-<!--    //        автор, номер продавца, тип продукта (подразумевается-->
-<!--    //        электроника, книги, сантехника и т.п.), стоимость, название.-->
     <label for="author">Author: </label>
     <input type="text" id="author" name="author" required><br>
 
@@ -45,7 +129,8 @@
     <label for="name">Name: </label>
     <input type="text" id="name" name="name" required><br>
 
-    <button type="submit">Add</button>
+    <button type="submit" class="btn-success">Add</button>
 </form>
 </body>
+
 </html>

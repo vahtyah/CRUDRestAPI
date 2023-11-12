@@ -7,17 +7,93 @@
         body {
             display: flex;
             justify-content: space-between;
+            font-family: Arial, sans-serif;
         }
 
-        #products {
-            width: 48%; /* Adjust the width as needed */
-            margin-right: 2%;
-        }
-
+        #products,
         #cart {
             width: 48%; /* Adjust the width as needed */
-            margin-left: 2%;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin: 20px;
+            box-sizing: border-box;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
+
+        #products h1,
+        #cart h1 {
+            color: #333;
+            text-align: center;
+        }
+
+        h2 {
+            color: #555;
+            margin-top: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        td {
+            background-color: #fff;
+        }
+
+        .btn {
+            text-decoration: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            display: inline-block;
+            margin-top: 5px;
+        }
+
+        .btn-success {
+            background-color: #5cb85c;
+            color: #fff;
+        }
+
+        .btn-danger {
+            background-color: #d9534f;
+            color: #fff;
+        }
+
+        .btn-primary {
+            background-color: #337ab7;
+            color: #fff;
+        }
+
+        form {
+            display: flex;
+            align-items: center;
+        }
+
+        button {
+            background-color: #337ab7;
+            color: #fff;
+            border: none;
+            padding: 5px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        span {
+            margin: 0 10px;
+        }
+
     </style>
 </head>
 <body>
@@ -71,7 +147,7 @@
             </td>
     </table>
 
-    <h2>Washing Machine</h2>
+    <h2>Washing Machines</h2>
     <table>
         <tr>
             <th>ID</th>
