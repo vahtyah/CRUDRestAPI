@@ -1,8 +1,12 @@
 package com.example.mymarketplace.controllers;
 
+import com.example.mymarketplace.models.Book;
+import com.example.mymarketplace.models.Role;
 import com.example.mymarketplace.models.User;
+import com.example.mymarketplace.repositories.BookRepository;
 import com.example.mymarketplace.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,39 +15,29 @@ import java.util.List;
 @RequestMapping("/api/users")
 public class UserController {
     @Autowired
+    private BookRepository bookRepository;
+    @Autowired
     private UserRepository userRepository;
 
     @GetMapping
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
+    public ResponseEntity<String> getRole() {
+        return ResponseEntity.ok("Hello User");
     }
 
-    @GetMapping("/{id}")
-    public User getUserById(@PathVariable Long id) {
-        return userRepository.findById(id).get();
+    @GetMapping("/books")
+    public ResponseEntity<List<Book>> getBooks() {
+        return ResponseEntity.ok(bookRepository.findAll());
     }
 
-    @PostMapping
-    public User createUser(@RequestBody User user) {
-        return userRepository.save(user);
+    @GetMapping("/books/{id}")
+    public ResponseEntity<Book> getBookById(Long id) {
+        return ResponseEntity.ok(bookRepository.findById(id).get());
     }
 
-    @PutMapping("/{id}")
-    public User updateUser(@PathVariable Long id, @RequestBody User user) {
+    @PutMapping("/update_role/{id}")
+    public ResponseEntity<User> updateUserRole(@PathVariable Long id) {
         User userFromDb = userRepository.findById(id).get();
-        userFromDb.setLogin(user.getLogin());
-        userFromDb.setName(user.getName());
-        userFromDb.setPassword(user.getPassword());
-        return userRepository.save(userFromDb);
-    }
-
-    @DeleteMapping("/{id}")
-    public String deleteUser(@PathVariable Long id) {
-        try {
-            userRepository.deleteById(id);
-            return "User deleted";
-        } catch (Exception e) {
-            return "User not found";
-        }
+        userFromDb.setRole(Role.SELLER);
+        return ResponseEntity.ok(userRepository.save(userFromDb));
     }
 }
